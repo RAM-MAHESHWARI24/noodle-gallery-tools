@@ -122,5 +122,33 @@ Our goal is to natively integrate these capabilities directly into [Open-Noodle 
 
 ---
 
+## 🛡️ Three-Tier Quality & Gatekeeping Protection
+
+Noodle Gallery Tools enforces an industry-standard 3-tier defense-in-depth model:
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│ Tier 1: Local Pre-Commit Hook (< 1.5s)                                  │
+│   • Python Syntax & AST Compilation (py_compile)                        │
+│   • Secret & Credential Leak Scanning (Tokens, Private Keys)            │
+│   • Documentation Relative Link Integrity (README.md, docs/)            │
+│   • Shell Script Sanity & Shebang Enforcement                           │
+├─────────────────────────────────────────────────────────────────────────┤
+│ Tier 2: Local Pre-Push Regression Suite (~5-10s)                        │
+│   • CLI Command Argument Parsing (sync_space_faces.py, export_faces)    │
+│   • End-to-End Pipeline Unit Suite (tests/test_pipeline.py)             │
+├─────────────────────────────────────────────────────────────────────────┤
+│ Tier 3: Remote GitHub Actions CI & Branch Protection                    │
+│   • Python Matrix Lint & Test Harness (.github/workflows/ci.yml)        │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+To activate local hooks in your clone:
+```bash
+git config core.hooksPath .githooks
+```
+
+---
+
 ## 📄 License
 MIT License. Free to use, modify, and protect your family photo archives!
